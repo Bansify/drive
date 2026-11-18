@@ -310,7 +310,7 @@ export function ReceiveShareModal({
                 href={buildSsoSignInUrl(window.location.href)}
                 className="w-full py-3 rounded-xl bg-md-primary text-md-on-primary text-xs font-bold flex items-center justify-center gap-2 hover:brightness-95 transition-all"
               >
-                Sign in with Gothwad Account to Import File
+                Sign in with Bansify Account to Import File
               </a>
             )}
           </div>

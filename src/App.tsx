@@ -316,7 +316,7 @@ export default function App() {
     async (target: GothwadAccountItem) => {
       const res = await switchSsoAccount({ id: target.id, authuser: target.authuser ?? authuser });
       if (!res.ok) {
-        triggerToast(res.error || "Could not switch Gothwad account.", "error");
+        triggerToast(res.error || "Could not switch Bansify account.", "error");
         return;
       }
       const nextSlot = target.authuser ?? 0;
@@ -349,7 +349,7 @@ export default function App() {
   }, [disconnectSessionForSwitch, resetLocalWorkspace, retryStartup]);
 
   if (booting && startupState.phase === "checking_identity") {
-    return <LoadingScreen message="Bansify Drive" subtext="Verifying your Gothwad Technologies identity..." />;
+    return <LoadingScreen message="Bansify Drive" subtext="Verifying your Bansify identity..." />;
   }
 
   const showStatusInsteadOfWizard =

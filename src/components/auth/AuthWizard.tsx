@@ -106,8 +106,8 @@ export function AuthWizard({
               : state.step === "password"
                 ? "Two-Step Verification (2FA) is enabled. Enter your cloud password."
                 : ssoUser
-                  ? "One-time Cloud Vault activation: link your Telegram MTProto engine to your Gothwad Account."
-                  : "Infinite, serverless cloud storage powered by Telegram MTProto and Gothwad SSO."}
+                  ? "One-time Cloud Vault activation: link your Telegram MTProto engine to your Bansify Account."
+                  : "Infinite, serverless cloud storage powered by Telegram MTProto and Bansify SSO."}
           </p>
 
           {ssoUser ? (
@@ -136,7 +136,7 @@ export function AuthWizard({
               className="mt-4 w-full py-2.5 px-4 rounded-xl bg-[#0494f4]/10 hover:bg-[#0494f4]/20 border border-[#0494f4]/30 text-[#0494f4] text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer"
             >
               <LogIn size={14} />
-              <span>Sign in with Gothwad Account (SSO)</span>
+              <span>Sign in with Bansify Account (SSO)</span>
             </a>
           )}
         </div>

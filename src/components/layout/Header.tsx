@@ -121,7 +121,7 @@ export function Header({
 
   const displayName =
     ssoUser?.name ||
-    (userProfile ? [userProfile.firstName, userProfile.lastName].filter(Boolean).join(" ") : "Gothwad User");
+    (userProfile ? [userProfile.firstName, userProfile.lastName].filter(Boolean).join(" ") : "Bansify User");
   const emailOrUsername = ssoUser?.email || (userProfile?.username ? `@${userProfile.username}` : "");
   const avatarUrl = ssoUser?.avatar_url || userProfile?.avatarUrl;
   const initials = initialsFrom(displayName, emailOrUsername);
@@ -230,7 +230,7 @@ export function Header({
           />
           <div className="min-w-0">
             <h1 className="text-xs sm:text-sm font-bold text-md-on-surface leading-tight flex items-center gap-1 truncate">
-              <span className="text-[#0494f4]">Gothwad</span>
+              <span className="text-[#0494f4]">Bansify</span>
               <span className="hidden xs:inline">Drive</span>
             </h1>
             <p className="text-[9px] sm:text-[10px] text-md-on-surface-variant leading-tight font-medium truncate hidden md:block">

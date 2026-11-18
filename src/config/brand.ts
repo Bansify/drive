@@ -27,7 +27,7 @@ export const APP_DOMAIN = (readViteEnv("VITE_APP_DOMAIN") || DEFAULT_APP_DOMAIN)
 
 export const BRAND_NAME = "Bansify Drive";
 export const BRAND_SHORT_NAME = "Drive";
-export const ECOSYSTEM_NAME = "Gothwad";
+export const ECOSYSTEM_NAME = "Bansify";
 
 export const DRIVE_ORIGIN = `https://drive.${APP_DOMAIN}`;
 export const DRIVE_WEB_ORIGIN = DRIVE_ORIGIN;
