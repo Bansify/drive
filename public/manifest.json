@@ -1,6 +1,6 @@
 {
-  "name": "Gothwad Drive — Infinite Cloud Storage",
-  "short_name": "Gothwad Drive",
+  "name": "Bansify Drive — Infinite Cloud Storage",
+  "short_name": "Bansify Drive",
   "description": "Infinite, serverless cloud storage powered by Telegram's MTProto protocol. No backend, runs entirely in your browser.",
   "id": "/",
   "start_url": "/",

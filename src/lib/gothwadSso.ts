@@ -157,7 +157,7 @@ function classifyNetworkCatch(err: unknown, extSignal?: AbortSignal): {
   }
   return {
     errorKind: "network",
-    errorMessage: "Network error while contacting Gothwad Drive API. Check your internet connection.",
+    errorMessage: "Network error while contacting Bansify Drive API. Check your internet connection.",
   };
 }
 

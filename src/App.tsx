@@ -349,7 +349,7 @@ export default function App() {
   }, [disconnectSessionForSwitch, resetLocalWorkspace, retryStartup]);
 
   if (booting && startupState.phase === "checking_identity") {
-    return <LoadingScreen message="Gothwad Drive" subtext="Verifying your Gothwad Technologies identity..." />;
+    return <LoadingScreen message="Bansify Drive" subtext="Verifying your Gothwad Technologies identity..." />;
   }
 
   const showStatusInsteadOfWizard =
@@ -364,7 +364,7 @@ export default function App() {
       <div className="min-h-screen flex flex-col bg-md-background text-md-on-background">
         {ssoUser && (
           <Header
-            driveTitle="Gothwad Drive" searchQuery="" onSearchChange={() => {}}
+            driveTitle="Bansify Drive" searchQuery="" onSearchChange={() => {}}
             onLogout={handleLogout} userProfile={userProfile} accounts={accounts}
             activeAccountId={activeAccountId} onSwitchAccount={switchAccount}
             onRemoveAccount={removeAccount} onAddAccount={beginAddAccount}

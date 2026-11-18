@@ -170,7 +170,7 @@ export const AppModals: React.FC<AppModalsProps> = ({
     <Modal open={showJoinPrompt} onClose={onSkipJoinChannel} title="Join our Update Channel">
       <div className="space-y-4 text-center sm:text-left select-none">
         <p className="text-sm text-surface-650 dark:text-surface-600 leading-relaxed font-semibold">
-          Stay informed with the latest features, releases, and service announcements for Gothwad Drive.
+          Stay informed with the latest features, releases, and service announcements for Bansify Drive.
         </p>
         <div className="flex items-center justify-center sm:justify-start gap-2 bg-brand-500/10 text-brand-450 dark:text-brand-400 px-3.5 py-2.5 rounded-2xl border border-brand-500/15 font-bold text-xs">
           <span>Official Channel:</span>

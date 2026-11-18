@@ -25,7 +25,7 @@ export const APP_DOMAIN = (readViteEnv("VITE_APP_DOMAIN") || DEFAULT_APP_DOMAIN)
   .replace(/^https?:\/\//, "")
   .replace(/\/+$/, "");
 
-export const BRAND_NAME = "Gothwad Drive";
+export const BRAND_NAME = "Bansify Drive";
 export const BRAND_SHORT_NAME = "Drive";
 export const ECOSYSTEM_NAME = "Gothwad";
 

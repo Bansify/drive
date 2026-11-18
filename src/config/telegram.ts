@@ -155,7 +155,7 @@ export function hasDriveSignature(bioOrAbout?: string | null): boolean {
 /**
  * Default supergroup title when auto-creating.
  */
-export const DEFAULT_DRIVE_TITLE = "Gothwad Drive";
+export const DEFAULT_DRIVE_TITLE = "Bansify Drive";
 
 /**
  * Chunk size for file splitting (50 MB).

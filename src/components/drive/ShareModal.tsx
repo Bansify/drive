@@ -46,7 +46,7 @@ export function ShareModal({
           chatId: driveConfig?.chatId || "",
           file: { ...file, chatId: driveConfig?.chatId },
           ttlSeconds,
-          senderInfo: "Gothwad Drive User",
+          senderInfo: "Bansify Drive User",
         },
         authuser
       );
@@ -67,7 +67,7 @@ export function ShareModal({
             chatId: driveConfig?.chatId,
           },
           ttlSeconds,
-          senderInfo: "Gothwad Drive User",
+          senderInfo: "Bansify Drive User",
         }),
       });
 
@@ -228,7 +228,7 @@ export function ShareModal({
             )}
 
             <a
-              href={`https://t.me/share/url?url=${encodeURIComponent(getShareLink())}&text=${encodeURIComponent(`Check out this file on Gothwad Drive: ${file.name}`)}`}
+              href={`https://t.me/share/url?url=${encodeURIComponent(getShareLink())}&text=${encodeURIComponent(`Check out this file on Bansify Drive: ${file.name}`)}`}
               target="_blank"
               rel="noreferrer"
               className="w-full py-3 rounded-full bg-md-tertiary text-md-on-tertiary text-xs font-semibold uppercase tracking-wider hover:brightness-95 transition-all flex items-center justify-center gap-2"

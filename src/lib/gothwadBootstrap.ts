@@ -105,7 +105,7 @@ export async function fetchDriveBootstrap(
       return makeIdentityError(authuser, "redirect", "Bootstrap endpoint /api/drive/bootstrap returned an unexpected redirect.");
     }
     if (res.status === 429) {
-      return makeIdentityError(authuser, "rate_limited", "Rate limited (429) while initializing Gothwad Drive. Please wait and retry.");
+      return makeIdentityError(authuser, "rate_limited", "Rate limited (429) while initializing Bansify Drive. Please wait and retry.");
     }
 
     const ct = (res.headers.get("content-type") || "").toLowerCase();
@@ -318,8 +318,8 @@ export async function fetchDriveBootstrap(
       authuser,
       isTimeout ? "timeout" : "network",
       isTimeout
-        ? "Timed out while contacting Gothwad Drive API."
-        : "Network failure while contacting Gothwad Drive API."
+        ? "Timed out while contacting Bansify Drive API."
+        : "Network failure while contacting Bansify Drive API."
     );
   }
 }

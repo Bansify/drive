@@ -221,7 +221,7 @@ export function Header({
         <div className="flex items-center gap-2 sm:gap-2.5 shrink-0 select-none">
           <img
             src="/icon-192.png"
-            alt="Gothwad Drive"
+            alt="Bansify Drive"
             className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl object-contain shadow-xs shrink-0"
             onError={(e) => {
               const target = e.currentTarget as HTMLImageElement;
@@ -234,7 +234,7 @@ export function Header({
               <span className="hidden xs:inline">Drive</span>
             </h1>
             <p className="text-[9px] sm:text-[10px] text-md-on-surface-variant leading-tight font-medium truncate hidden md:block">
-              {driveTitle === "Gothwad Drive" || driveTitle === "TG Cloud Drive" ? "Telegram Cloud Storage" : driveTitle}
+              {driveTitle === "Bansify Drive" || driveTitle === "TG Cloud Drive" ? "Telegram Cloud Storage" : driveTitle}
             </p>
           </div>
         </div>
