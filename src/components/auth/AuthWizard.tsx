@@ -87,7 +87,7 @@ export function AuthWizard({
           <div className="w-16 h-16 bg-gray-50 dark:bg-[#1a1a1a] rounded-2xl shadow-inner flex items-center justify-center border border-gray-200 dark:border-[#383838] p-0 overflow-hidden mb-3.5 group transition-transform hover:scale-105">
             <img
               src="/icon-512-maskable.png"
-              alt="Gothwad Drive Logo"
+              alt="Bansify Drive Logo"
               className="w-full h-full object-cover scale-105"
               onError={(e) => {
                 const target = e.currentTarget as HTMLImageElement;
@@ -98,7 +98,7 @@ export function AuthWizard({
             />
           </div>
           <h2 className="text-[26px] font-black text-gray-900 dark:text-white tracking-tight mb-1">
-            Gothwad Drive
+            Bansify Drive
           </h2>
           <p className="text-gray-600 dark:text-gray-400 text-xs leading-relaxed max-w-[290px] mx-auto font-medium">
             {state.step === "otp"
@@ -106,8 +106,8 @@ export function AuthWizard({
               : state.step === "password"
                 ? "Two-Step Verification (2FA) is enabled. Enter your cloud password."
                 : ssoUser
-                  ? "One-time Cloud Vault activation: link your Telegram MTProto engine to your Gothwad Account."
-                  : "Infinite, serverless cloud storage powered by Telegram MTProto and Gothwad SSO."}
+                  ? "One-time Cloud Vault activation: link your Telegram MTProto engine to your Bansify Account."
+                  : "Infinite, serverless cloud storage powered by Telegram MTProto and Bansify SSO."}
           </p>
 
           {ssoUser ? (
@@ -136,7 +136,7 @@ export function AuthWizard({
               className="mt-4 w-full py-2.5 px-4 rounded-xl bg-[#0494f4]/10 hover:bg-[#0494f4]/20 border border-[#0494f4]/30 text-[#0494f4] text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer"
             >
               <LogIn size={14} />
-              <span>Sign in with Gothwad Account (SSO)</span>
+              <span>Sign in with Bansify Account (SSO)</span>
             </a>
           )}
         </div>
@@ -271,7 +271,7 @@ export function AuthWizard({
 
         <div className="w-full bg-white dark:bg-[#282828] border border-gray-200 dark:border-[#383838] rounded-2xl p-5 text-center flex flex-col items-center justify-center mt-5 shadow-sm select-none gap-3.5 transition-colors">
           <p className="text-[10px] text-gray-500 dark:text-gray-400 leading-relaxed max-w-[280px] mx-auto">
-            By using <span className="font-bold text-[#0494f4]">Gothwad Drive</span>, you agree to our{" "}
+            By using <span className="font-bold text-[#0494f4]">Bansify Drive</span>, you agree to our{" "}
             <span className="font-bold text-[#0494f4] hover:underline cursor-pointer">
               Terms of Service
             </span>{" "}
@@ -283,7 +283,7 @@ export function AuthWizard({
           <div className="w-full h-[1px] bg-gray-200 dark:bg-white/10" />
           <div className="text-center max-w-[280px] mx-auto">
             <span className="text-[10px] font-semibold text-gray-500 dark:text-gray-400/80 block leading-relaxed">
-              <span className="font-bold text-[#0494f4]">Gothwad Drive</span> is proudly developed and managed by{" "}
+              <span className="font-bold text-[#0494f4]">Bansify Drive</span> is proudly developed and managed by{" "}
               <a
                 href="https://gothwadtech.com"
                 target="_blank"

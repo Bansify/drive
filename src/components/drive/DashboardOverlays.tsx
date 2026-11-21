@@ -351,8 +351,8 @@ export const MobileSidebarDrawer: React.FC<MobileSidebarDrawerProps> = ({
       <div className="relative flex flex-col w-72 max-w-[85vw] bg-white dark:bg-[#212121] h-full shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-r border-gray-200 dark:border-[#383838] animate-slide-right select-none z-50">
         <div className="p-4 border-b border-gray-200 dark:border-[#383838] flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <img src="/icon-192.png" alt="Gothwad Drive" className="w-6 h-6 rounded-lg object-contain" />
-            <span className="text-xs font-bold text-gray-900 dark:text-white">Gothwad Drive</span>
+            <img src="/icon-192.png" alt="Bansify Drive" className="w-6 h-6 rounded-lg object-contain" />
+            <span className="text-xs font-bold text-gray-900 dark:text-white">Bansify Drive</span>
           </div>
           <button
             onClick={onClose}

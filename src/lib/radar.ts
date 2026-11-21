@@ -341,7 +341,7 @@ export async function scanForDriveGroup(
 
       const config: DriveConfig = {
         chatId: markedId,
-        chatTitle: chat.title || "Gothwad Drive",
+        chatTitle: chat.title || "Bansify Drive",
         accessHash: accessHashStr,
       };
 

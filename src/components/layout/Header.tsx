@@ -121,7 +121,7 @@ export function Header({
 
   const displayName =
     ssoUser?.name ||
-    (userProfile ? [userProfile.firstName, userProfile.lastName].filter(Boolean).join(" ") : "Gothwad User");
+    (userProfile ? [userProfile.firstName, userProfile.lastName].filter(Boolean).join(" ") : "Bansify User");
   const emailOrUsername = ssoUser?.email || (userProfile?.username ? `@${userProfile.username}` : "");
   const avatarUrl = ssoUser?.avatar_url || userProfile?.avatarUrl;
   const initials = initialsFrom(displayName, emailOrUsername);
@@ -221,7 +221,7 @@ export function Header({
         <div className="flex items-center gap-2 sm:gap-2.5 shrink-0 select-none">
           <img
             src="/icon-192.png"
-            alt="Gothwad Drive"
+            alt="Bansify Drive"
             className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl object-contain shadow-xs shrink-0"
             onError={(e) => {
               const target = e.currentTarget as HTMLImageElement;
@@ -230,11 +230,11 @@ export function Header({
           />
           <div className="min-w-0">
             <h1 className="text-xs sm:text-sm font-bold text-md-on-surface leading-tight flex items-center gap-1 truncate">
-              <span className="text-[#0494f4]">Gothwad</span>
+              <span className="text-[#0494f4]">Bansify</span>
               <span className="hidden xs:inline">Drive</span>
             </h1>
             <p className="text-[9px] sm:text-[10px] text-md-on-surface-variant leading-tight font-medium truncate hidden md:block">
-              {driveTitle === "Gothwad Drive" || driveTitle === "TG Cloud Drive" ? "Telegram Cloud Storage" : driveTitle}
+              {driveTitle === "Bansify Drive" || driveTitle === "TG Cloud Drive" ? "Telegram Cloud Storage" : driveTitle}
             </p>
           </div>
         </div>

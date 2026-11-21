@@ -53,7 +53,7 @@ export async function stampDriveSignature(
     };
     const newAbout = existingBio && existingBio.trim()
       ? (hasDriveSignature(existingBio) ? existingBio : `${existingBio}\n${DRIVE_SIGNATURE}`)
-      : `Personal cloud storage powered by Gothwad Drive.\n${DRIVE_SIGNATURE}`;
+      : `Personal cloud storage powered by Bansify Drive.\n${DRIVE_SIGNATURE}`;
 
     await client.call({
       _: "messages.editChatAbout",
@@ -108,7 +108,7 @@ export async function createDriveGroup(
   const result: any = await client.call({
     _: "channels.createChannel",
     title: DEFAULT_DRIVE_TITLE,
-    about: `Personal cloud storage powered by Gothwad Drive.\n${DRIVE_SIGNATURE}`,
+    about: `Personal cloud storage powered by Bansify Drive.\n${DRIVE_SIGNATURE}`,
     megagroup: true,
     forum: true,
   });
@@ -130,7 +130,7 @@ export async function createDriveGroup(
     await client.call({
       _: "messages.editChatAbout",
       peer: peerInput,
-      about: `Personal cloud storage powered by Gothwad Drive.\n${DRIVE_SIGNATURE}`,
+      about: `Personal cloud storage powered by Bansify Drive.\n${DRIVE_SIGNATURE}`,
     });
   } catch (e) {
     console.warn("Failed to set chat description in createDriveGroup:", e);

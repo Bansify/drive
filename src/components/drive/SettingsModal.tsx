@@ -121,7 +121,7 @@ export function SettingsModal({
           </div>
 
           <div className="hidden md:block pt-4 border-t border-md-outline-variant/20 text-[10px] font-semibold text-md-on-surface-variant text-center">
-            GothwadDrive v{APP_VERSION}
+            BansifyDrive v{APP_VERSION}
           </div>
         </div>
 
@@ -243,7 +243,7 @@ export function SettingsModal({
                 </div>
 
                 <div className="flex items-center justify-between py-1.5">
-                  <span className="font-semibold text-md-on-surface-variant">Linked on GothwadDrive</span>
+                  <span className="font-semibold text-md-on-surface-variant">Linked on BansifyDrive</span>
                   <span className="font-mono font-semibold text-md-on-surface">
                     {new Date().toLocaleDateString()}
                   </span>

@@ -1,6 +1,6 @@
 {
-  "name": "Gothwad Drive",
-  "description": "Gothwad Drive — Infinite, serverless cloud storage powered by Telegram MTProto with Gothwad Account SSO and AES-256-GCM encrypted cross-device session sync.",
+  "name": "Bansify Drive",
+  "description": "Bansify Drive — Infinite, serverless cloud storage powered by Telegram MTProto with Gothwad Account SSO and AES-256-GCM encrypted cross-device session sync.",
   "permissions": [],
   "capabilities": []
 }

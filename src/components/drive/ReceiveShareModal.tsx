@@ -68,7 +68,7 @@ export function ReceiveShareModal({
       const d1Result = await fetchShortShare(cleanHash);
       if (d1Result.ok && d1Result.data?.file) {
         setSharedFile(d1Result.data.file);
-        setSenderInfo(d1Result.data.sender || "Gothwad Drive User");
+        setSenderInfo(d1Result.data.sender || "Bansify Drive User");
         setTtlRemaining(d1Result.ttlRemaining ?? -1);
         return;
       }
@@ -80,7 +80,7 @@ export function ReceiveShareModal({
 
       if (result.ok && result.data && result.data.file) {
         setSharedFile(result.data.file);
-        setSenderInfo(result.data.sender || "Gothwad Drive User");
+        setSenderInfo(result.data.sender || "Bansify Drive User");
         setTtlRemaining(result.ttlRemaining ?? -1);
       } else {
         setError(result.error || d1Result.error || "Share token not found or expired.");
@@ -310,7 +310,7 @@ export function ReceiveShareModal({
                 href={buildSsoSignInUrl(window.location.href)}
                 className="w-full py-3 rounded-xl bg-md-primary text-md-on-primary text-xs font-bold flex items-center justify-center gap-2 hover:brightness-95 transition-all"
               >
-                Sign in with Gothwad Account to Import File
+                Sign in with Bansify Account to Import File
               </a>
             )}
           </div>

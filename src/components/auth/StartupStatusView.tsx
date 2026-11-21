@@ -69,7 +69,7 @@ export function StartupStatusView({
 
           <p className="text-xs text-md-on-surface-variant leading-relaxed">
             {startupState.errorMessage ||
-              "Could not verify your Gothwad Technologies identity. Your cloud vault has not been modified and you have not been signed out."}
+              "Could not verify your Bansify identity. Your cloud vault has not been modified and you have not been signed out."}
           </p>
 
           {isRoutingHtml && (
@@ -93,7 +93,7 @@ export function StartupStatusView({
               href={buildSsoSignInUrl(slotUrl(authuser))}
               className="py-2.5 px-4 rounded-xl bg-md-surface-container-high hover:bg-md-surface-container-highest text-md-on-surface text-xs font-semibold transition-colors"
             >
-              Open Gothwad Accounts
+              Open Bansify Accounts
             </a>
           </div>
         </div>
