@@ -4,7 +4,7 @@ compatibility_date = "2024-11-01"
 keep_vars = true
 
 routes = [
-  { pattern = "drive.gothwadtech.com/api/*", zone_name = "gothwadtech.com" }
+  { pattern = "drive.bansify.com/api/*", zone_name = "bansify.com" }
 ]
 
 [[d1_databases]]
@@ -13,6 +13,6 @@ database_name = "drive"
 database_id = "dfefd813-244a-47f1-8f5a-8d5c15ba3162"
 
 [vars]
-APP_DOMAIN = "gothwadtech.com"
-ACCOUNTS_API_URL = "https://api.gothwadtech.com"
-ACCOUNTS_WEB_URL = "https://accounts.gothwadtech.com"
+APP_DOMAIN = "bansify.com"
+ACCOUNTS_API_URL = "https://api.bansify.com"
+ACCOUNTS_WEB_URL = "https://accounts.bansify.com"

@@ -76,7 +76,7 @@ export function StartupStatusView({
             <div className="p-3 rounded-xl bg-md-surface-container-high border border-md-outline-variant/30 text-[11px] text-md-on-surface-variant space-y-1">
               <p className="font-semibold text-md-on-surface">Cloudflare Routing Diagnosis:</p>
               <p>
-                The browser received an HTML document from <code className="font-mono">/api/*</code> instead of JSON. Ensure the Cloudflare Worker route <code className="font-mono">drive.gothwadtech.com/api/*</code> is bound to the <code className="font-mono">drive</code> Worker.
+                The browser received an HTML document from <code className="font-mono">/api/*</code> instead of JSON. Ensure the Cloudflare Worker route <code className="font-mono">drive.bansify.com/api/*</code> is bound to the <code className="font-mono">drive</code> Worker.
               </p>
             </div>
           )}
