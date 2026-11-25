@@ -16,7 +16,10 @@ import {
   switchSsoAccount, signOutSsoSlot, signOutAllSso, slotUrl,
 } from "./lib/bansifySso";
 
+import { BansifyShell, DRIVE_SECTIONS } from "./ui/BansifyShell";
+
 const Dashboard = lazy(() => import("./components/drive/Dashboard").then((m) => ({ default: m.Dashboard })));
+
 const AppModals = lazy(() => import("./components/drive/AppModals").then((m) => ({ default: m.AppModals })));
 
 export default function App() {
@@ -44,6 +47,8 @@ export default function App() {
   const [booting, setBooting] = useState(true);
   const [manualRelinkOpen, setManualRelinkOpen] = useState(false);
   const [activeFolderId, setActiveFolderId] = useState<number | null>(null);
+  const [shellSection, setShellSection] = useState<string>("my-drive");
+  const [settingsSignal, setSettingsSignal] = useState<number>(0);
   const [authuser, setAuthuser] = useState<number>(() => getCurrentAuthuser());
   const [ssoUser, setSsoUser] = useState<GothwadSsoUser | null>(null);
   const [ssoAccounts, setSsoAccounts] = useState<GothwadAccountItem[]>([]);
@@ -413,7 +418,27 @@ export default function App() {
     <>
       <VaultSyncBanner vaultSyncState={vaultSyncState} onRetrySave={retryVaultSave} onExportLegacySession={exportLegacySessionBackup} />
       <Suspense fallback={<LoadingScreen message="Loading Drive Workspace" subtext="Preparing your folders and files..." />}>
+        <BansifyShell
+          sections={DRIVE_SECTIONS}
+          activeSection={shellSection}
+          onSelect={(id) => {
+            setShellSection(id);
+            if (id === "my-drive") setActiveFolderId(null);
+          }}
+          onOpenSettings={() => setSettingsSignal((n) => n + 1)}
+          isDark={theme === "dark"}
+          onToggleTheme={() => setTheme(theme === "dark" ? "light" : "dark")}
+          userName={ssoUser?.name || userProfile?.firstName || userProfile?.username}
+          userEmail={ssoUser?.email}
+          userAvatar={null}
+          onAccount={() => {
+            window.location.href = "https://accounts.bansify.com/account";
+          }}
+          searchPlaceholder="Search Drive"
+        >
         <Dashboard
+          embedded
+          settingsSignal={settingsSignal}
           client={client} driveConfig={driveConfig} topics={topics} files={files}
           loadingFiles={loadingFiles} uploads={uploads} downloadProgress={downloadProgress}
           onFolderClick={setActiveFolderId} onBackToRoot={() => setActiveFolderId(null)}
@@ -464,6 +489,7 @@ export default function App() {
           onSignOutSsoSlot={handleSignOutSsoSlot} onSignOutAllSso={handleSignOutAllSso}
           onUnlinkVault={handleUnlinkVault}
         />
+        </BansifyShell>
         <AppModals
           client={client} driveConfig={driveConfig} topics={topics}
           activeFolderId={activeFolderId} authuser={authuser}

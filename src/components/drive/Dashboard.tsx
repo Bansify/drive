@@ -33,10 +33,17 @@ export function Dashboard(props: DashboardProps) {
     fileSharingEnabled, onToggleFileSharing, onOpenReceiveShare, ssoUser,
     ssoAccounts, ssoActiveId, authuser = 0, onSwitchSsoAccount,
     onSignOutSsoSlot, onSignOutAllSso, onUnlinkVault,
+    embedded = false, settingsSignal = 0,
   } = props;
   const [searchQuery, setSearchQuery] = useState("");
   const [showCreateFolder, setShowCreateFolder] = useState(false);
   const [showSettingsModal, setShowSettingsModal] = useState(false);
+
+  // Inside the shell the app keeps its own chrome out of the way and lets the shell open
+  // settings; every other behaviour is unchanged.
+  useEffect(() => {
+    if (embedded && settingsSignal) setShowSettingsModal(true);
+  }, [embedded, settingsSignal]);
   const [moveCopyTarget, setMoveCopyTarget] = useState<{ open: boolean; files: DriveFile[] } | null>(null);
   const [infoModalFile, setInfoModalFile] = useState<DriveFile | null>(null);
   const [recentContextMenu, setRecentContextMenu] = useState<{
@@ -238,7 +245,7 @@ export function Dashboard(props: DashboardProps) {
   }, [onFileDrop]);
 
   return (
-    <div className="h-screen max-h-screen overflow-hidden bg-white dark:bg-[#212121] flex flex-col relative transition-colors duration-300">
+    <div className={`${embedded ? "h-full" : "h-screen max-h-screen"} overflow-hidden bg-white dark:bg-[#212121] flex flex-col relative transition-colors duration-300`}>
       <FloatingTransferWidget
         uploads={uploads}
         downloadProgress={downloadProgress}
@@ -256,7 +263,7 @@ export function Dashboard(props: DashboardProps) {
         </div>
       )}
 
-      <Header
+      {!embedded && (<Header
         driveTitle={driveConfig.chatTitle}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
@@ -286,9 +293,10 @@ export function Dashboard(props: DashboardProps) {
         onSignOutAllSso={onSignOutAllSso}
         onUnlinkVault={onUnlinkVault}
       />
+      )}
 
       <div className="flex flex-1 overflow-hidden">
-        <Sidebar
+        {!embedded && (<Sidebar
           folders={topics}
           activeFolderId={activeFolderId}
           onFolderClick={onFolderClick}
@@ -301,6 +309,7 @@ export function Dashboard(props: DashboardProps) {
           joiningChannel={joiningChannel}
           onOpenReceiveShare={() => onOpenReceiveShare?.()}
         />
+        )}
 
         <main ref={mainRef} className="flex-1 min-w-0 overflow-y-auto p-3 sm:p-5 lg:p-8">
           <Breadcrumb
