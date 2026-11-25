@@ -1,17 +1,17 @@
 import type { DriveFile } from "../types";
 
-const DB_NAME = "GothwadDriveDB";
+const DB_NAME = "BansifyDriveDB";
 const DB_VERSION = 1;
 const STORE_NAME = "folder_index";
 
 let _activeScopePrefix = "local:anon:default";
 
 export function setActiveStorageScope(params: {
-  gothwadUserId?: string | null;
+  bansifyUserId?: string | null;
   tgUserId?: string | null;
   chatId?: string | null;
 }): void {
-  const gUser = params.gothwadUserId?.trim() || "local";
+  const gUser = params.bansifyUserId?.trim() || "local";
   const tUser = params.tgUserId?.trim() || "anon";
   const cId = params.chatId?.trim() || "default";
   _activeScopePrefix = `${gUser}:${tUser}:${cId}`;

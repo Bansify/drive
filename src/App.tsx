@@ -14,7 +14,7 @@ import { ensureBotIsAdmin, DEFAULT_WORKER_URL, BOT_USERNAME } from "./lib/bot";
 import {
   getCurrentAuthuser, getShareIdFromUrl, unlinkDriveVault,
   switchSsoAccount, signOutSsoSlot, signOutAllSso, slotUrl,
-} from "./lib/gothwadSso";
+} from "./lib/bansifySso";
 
 const Dashboard = lazy(() => import("./components/drive/Dashboard").then((m) => ({ default: m.Dashboard })));
 const AppModals = lazy(() => import("./components/drive/AppModals").then((m) => ({ default: m.AppModals })));
@@ -129,10 +129,10 @@ export default function App() {
     if (!client || !userProfile?.id) return;
     setJoiningChannel(true);
     try {
-      await client.joinChat("gothwadtech");
-      triggerToast("Successfully joined Gothwad Update Channel!", "success");
+      await client.joinChat("bansifytech");
+      triggerToast("Successfully joined Bansify Update Channel!", "success");
     } catch {
-      window.open("https://t.me/gothwadtech", "_blank");
+      window.open("https://t.me/bansifytech", "_blank");
     } finally {
       localStorage.setItem(`tgcd_prompted_join_${userProfile.id}`, "true");
       setJoiningChannel(false);

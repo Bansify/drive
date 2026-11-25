@@ -4,8 +4,8 @@
  * =============================================================================
  */
 
-import type { DriveVaultRow, Env, GothwadUser } from './types.ts';
-import { getTelegramApiConfig, resolveGothwadSession } from './auth.ts';
+import type { DriveVaultRow, Env, BansifyUser } from './types.ts';
+import { getTelegramApiConfig, resolveBansifySession } from './auth.ts';
 import { decryptVaultSession, encryptVaultSession } from './crypto.ts';
 import {
   errorResponse,
@@ -51,7 +51,7 @@ export interface VaultStatePayload {
 
 export async function readVaultStateForUser(
   env: Env,
-  user: GothwadUser,
+  user: BansifyUser,
 ): Promise<VaultStatePayload> {
   const row = await env.DB.prepare('SELECT * FROM drive_vaults WHERE user_id = ? LIMIT 1')
     .bind(user.id)
@@ -85,7 +85,7 @@ export async function readVaultStateForUser(
   const driveConfig = row.drive_chat_id
     ? {
         chatId: String(row.drive_chat_id),
-        chatTitle: String(row.drive_title || 'Gothwad Drive'),
+        chatTitle: String(row.drive_title || 'Bansify Drive'),
         accessHash: String(row.drive_access_hash || '0'),
       }
     : null;
@@ -145,7 +145,7 @@ export async function handleBootstrap(
   env: Env,
   fetchImpl: typeof fetch = fetch,
 ): Promise<Response> {
-  const session = await resolveGothwadSession(request, env, fetchImpl);
+  const session = await resolveBansifySession(request, env, fetchImpl);
   if (session.upstreamStatus === 429) {
     return errorResponse(request, env, 'rate_limited', 429, session.setCookies, 'Too many authentication requests.');
   }
@@ -200,7 +200,7 @@ export async function handleGetVault(
   env: Env,
   fetchImpl: typeof fetch = fetch,
 ): Promise<Response> {
-  const session = await resolveGothwadSession(request, env, fetchImpl);
+  const session = await resolveBansifySession(request, env, fetchImpl);
   if (session.upstreamStatus === 429) {
     return errorResponse(request, env, 'rate_limited', 429, session.setCookies);
   }
@@ -244,7 +244,7 @@ export async function handlePutVault(
     return errorResponse(request, env, 'csrf_rejected', 403, [], 'Cross-site request rejected');
   }
 
-  const session = await resolveGothwadSession(request, env, fetchImpl);
+  const session = await resolveBansifySession(request, env, fetchImpl);
   if (session.upstreamStatus === 429) {
     return errorResponse(request, env, 'rate_limited', 429, session.setCookies);
   }
@@ -257,7 +257,7 @@ export async function handlePutVault(
 
   const body = await readJsonBody(request);
   const expectedUserId = String(
-    request.headers.get('X-Gothwad-Expect-User') || body.expectedUserId || '',
+    request.headers.get('X-Bansify-Expect-User') || body.expectedUserId || '',
   ).trim();
   if (expectedUserId && expectedUserId !== session.user.id) {
     return errorResponse(
@@ -266,7 +266,7 @@ export async function handlePutVault(
       'account_mismatch',
       409,
       session.setCookies,
-      'Active Gothwad account changed before vault save completed.',
+      'Active Bansify account changed before vault save completed.',
     );
   }
 
@@ -415,7 +415,7 @@ export async function handleDeleteVault(
     return errorResponse(request, env, 'csrf_rejected', 403, [], 'Cross-site request rejected');
   }
 
-  const session = await resolveGothwadSession(request, env, fetchImpl);
+  const session = await resolveBansifySession(request, env, fetchImpl);
   if (session.upstreamStatus === 429) {
     return errorResponse(request, env, 'rate_limited', 429, session.setCookies);
   }
@@ -429,7 +429,7 @@ export async function handleDeleteVault(
   const url = new URL(request.url);
   const body = await readJsonBody(request);
   const expectedUserId = String(
-    request.headers.get('X-Gothwad-Expect-User') ||
+    request.headers.get('X-Bansify-Expect-User') ||
       url.searchParams.get('expectedUserId') ||
       body.expectedUserId ||
       '',
@@ -441,7 +441,7 @@ export async function handleDeleteVault(
       'account_mismatch',
       409,
       session.setCookies,
-      'Active Gothwad account does not match the vault requested for unlink.',
+      'Active Bansify account does not match the vault requested for unlink.',
     );
   }
 

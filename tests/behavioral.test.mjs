@@ -71,10 +71,10 @@ describe("Gothwad Drive Behavioral & Resilience Regression Suite", async () => {
   globalThis.sessionStorage = sessionStorageMock;
   globalThis.window = {
     location: {
-      href: "https://drive.gothwadtech.com/u/0/",
+      href: "https://drive.bansify.com/u/0/",
       pathname: "/u/0/",
       search: "",
-      origin: "https://drive.gothwadtech.com",
+      origin: "https://drive.bansify.com",
     },
     localStorage: localStorageMock,
     sessionStorage: sessionStorageMock,
@@ -84,7 +84,7 @@ describe("Gothwad Drive Behavioral & Resilience Regression Suite", async () => {
 
   const workerMod = await loadTsModule("worker/src/index.ts");
   const cryptoMod = await loadTsModule("worker/src/crypto.ts");
-  const ssoMod = await loadTsModule("src/lib/gothwadSso.ts");
+  const ssoMod = await loadTsModule("src/lib/bansifySso.ts");
   const dbMod = await loadTsModule("src/lib/db.ts");
   const authHelpersMod = await loadTsModule("src/lib/authHelpers.ts");
   const worker = workerMod.default;
@@ -132,7 +132,7 @@ describe("Gothwad Drive Behavioral & Resilience Regression Suite", async () => {
       globalThis.fetch = async () =>
         new Response(null, {
           status: 302,
-          headers: { Location: "https://accounts.gothwadtech.com/" },
+          headers: { Location: "https://accounts.bansify.com/" },
         });
       const errRedirect = await ssoMod.fetchDriveBootstrap(0);
       assert.equal(errRedirect.phase, "identity_error");
@@ -196,8 +196,8 @@ describe("Gothwad Drive Behavioral & Resilience Regression Suite", async () => {
     const db = createD1Mock(sqlite);
     const env = {
       DB: db,
-      APP_DOMAIN: "drive.gothwadtech.com",
-      ACCOUNTS_API_URL: "https://api.gothwadtech.com",
+      APP_DOMAIN: "drive.bansify.com",
+      ACCOUNTS_API_URL: "https://api.bansify.com",
       DRIVE_ENCRYPTION_KEY: "1111222233334444555566667777888899990000aaaabbbbccccddddeeeeffff",
     };
 
@@ -220,10 +220,10 @@ describe("Gothwad Drive Behavioral & Resilience Regression Suite", async () => {
     };
 
     // Save a vault first
-    const putReq = new Request("https://drive.gothwadtech.com/api/drive/vault", {
+    const putReq = new Request("https://drive.bansify.com/api/drive/vault", {
       method: "PUT",
       headers: {
-        Origin: "https://drive.gothwadtech.com",
+        Origin: "https://drive.bansify.com",
         Cookie: "gt_access=tok",
         "Content-Type": "application/json",
       },
@@ -239,7 +239,7 @@ describe("Gothwad Drive Behavioral & Resilience Regression Suite", async () => {
 
     // Reset counter and call GET /api/drive/bootstrap
     upstreamCalls = 0;
-    const bootReq = new Request("https://drive.gothwadtech.com/api/drive/bootstrap", {
+    const bootReq = new Request("https://drive.bansify.com/api/drive/bootstrap", {
       method: "GET",
       headers: { Cookie: "gt_access=old" },
     });
@@ -273,7 +273,7 @@ describe("Gothwad Drive Behavioral & Resilience Regression Suite", async () => {
 
     // 3a. Missing vault row returns vaultStatus: 'missing'
     const emptyRes = await worker.fetch(
-      new Request("https://drive.gothwadtech.com/api/drive/bootstrap", {
+      new Request("https://drive.bansify.com/api/drive/bootstrap", {
         headers: { Cookie: "gt_access=tok" },
       }),
       { DB: db, DRIVE_ENCRYPTION_KEY: keyA },
@@ -288,10 +288,10 @@ describe("Gothwad Drive Behavioral & Resilience Regression Suite", async () => {
     // 3b. Save valid vault under keyA
     const secretSession = "1BVtsO_precious_encrypted_session_must_never_be_lost";
     await worker.fetch(
-      new Request("https://drive.gothwadtech.com/api/drive/vault", {
+      new Request("https://drive.bansify.com/api/drive/vault", {
         method: "PUT",
         headers: {
-          Origin: "https://drive.gothwadtech.com",
+          Origin: "https://drive.bansify.com",
           Cookie: "gt_access=tok",
           "Content-Type": "application/json",
         },
@@ -304,7 +304,7 @@ describe("Gothwad Drive Behavioral & Resilience Regression Suite", async () => {
 
     // 3c. Reading under wrong keyB returns vaultStatus: 'corrupt' and preserves ciphertext in D1
     const corruptRes = await worker.fetch(
-      new Request("https://drive.gothwadtech.com/api/drive/bootstrap", {
+      new Request("https://drive.bansify.com/api/drive/bootstrap", {
         headers: { Cookie: "gt_access=tok" },
       }),
       { DB: db, DRIVE_ENCRYPTION_KEY: keyB },
@@ -318,10 +318,10 @@ describe("Gothwad Drive Behavioral & Resilience Regression Suite", async () => {
 
     // 3d. Attempting PUT /api/drive/vault under keyB without overwriteCorrupt:true is rejected with 409 vault_corrupt_locked
     const blockedPut = await worker.fetch(
-      new Request("https://drive.gothwadtech.com/api/drive/vault", {
+      new Request("https://drive.bansify.com/api/drive/vault", {
         method: "PUT",
         headers: {
-          Origin: "https://drive.gothwadtech.com",
+          Origin: "https://drive.bansify.com",
           Cookie: "gt_access=tok",
           "Content-Type": "application/json",
         },
@@ -337,7 +337,7 @@ describe("Gothwad Drive Behavioral & Resilience Regression Suite", async () => {
 
     // 3e. Restoring keyA still decrypts the original preserved ciphertext!
     const restoredRes = await worker.fetch(
-      new Request("https://drive.gothwadtech.com/api/drive/bootstrap", {
+      new Request("https://drive.bansify.com/api/drive/bootstrap", {
         headers: { Cookie: "gt_access=tok" },
       }),
       { DB: db, DRIVE_ENCRYPTION_KEY: keyA },
@@ -435,10 +435,10 @@ describe("Gothwad Drive Behavioral & Resilience Regression Suite", async () => {
       );
 
     const stalePutFromA = await worker.fetch(
-      new Request("https://drive.gothwadtech.com/api/drive/vault", {
+      new Request("https://drive.bansify.com/api/drive/vault", {
         method: "PUT",
         headers: {
-          Origin: "https://drive.gothwadtech.com",
+          Origin: "https://drive.bansify.com",
           Cookie: "gt_access=tok",
           "Content-Type": "application/json",
           "X-Gothwad-Expect-User": "usr_A",

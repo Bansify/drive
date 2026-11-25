@@ -6,10 +6,10 @@
 
 import type { Env } from './types.ts';
 
-export const UPSTREAM_COOKIE_ALLOWLIST = /^gothwad_[a-z_]+=/;
+export const UPSTREAM_COOKIE_ALLOWLIST = /^bansify_[a-z_]+=/;
 
 export function getAppDomain(env: Env): string {
-  return (env.APP_DOMAIN || 'gothwadtech.com').trim().toLowerCase();
+  return (env.APP_DOMAIN || 'bansify.com').trim().toLowerCase();
 }
 
 export function getAccountsApiOrigin(env: Env): string {

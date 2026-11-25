@@ -174,7 +174,7 @@ export const AppModals: React.FC<AppModalsProps> = ({
         </p>
         <div className="flex items-center justify-center sm:justify-start gap-2 bg-brand-500/10 text-brand-450 dark:text-brand-400 px-3.5 py-2.5 rounded-2xl border border-brand-500/15 font-bold text-xs">
           <span>Official Channel:</span>
-          <span className="font-mono">@gothwadtech</span>
+          <span className="font-mono">@bansifytech</span>
         </div>
         <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-2.5 pt-2">
           <button

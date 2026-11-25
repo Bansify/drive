@@ -55,7 +55,7 @@ async function verifyDriveGroup(
       }
 
       const validTitleKeywords = [
-        "gothwad drive", "gothwaddrive", "gothwad", "clash drive",
+        "bansify drive", "bansifydrive", "bansify", "clash drive",
         "tg cloud drive", "clashdrive", "tg cloud", "drive", "cloud", "vault",
       ];
       const isTitleValid = validTitleKeywords.some((kw) => titleLower.includes(kw));
@@ -105,7 +105,7 @@ async function verifyDriveGroup(
 
 /**
  * Scan the user's dialogs looking for an existing drive group.
- * Recognizes both `#GothwadDrive_v1` and `#TgCloudDrive_v1` signatures.
+ * Recognizes both `#BansifyDrive_v1` and `#TgCloudDrive_v1` signatures.
  */
 export async function scanForDriveGroup(
   client: TelegramClient
@@ -163,7 +163,7 @@ export async function scanForDriveGroup(
   }
 
   const TITLE_KEYWORDS = [
-    "gothwad drive", "gothwaddrive", "gothwad", "clash drive",
+    "bansify drive", "bansifydrive", "bansify", "clash drive",
     "tg cloud drive", "clashdrive", "tg cloud", "drive", "cloud", "storage", "vault",
   ];
   const titleCandidates: any[] = [];
@@ -320,11 +320,11 @@ export async function scanForDriveGroup(
         score += 1000000;
       }
 
-      if (titleLower === "gothwad drive" || titleLower === "clash drive" || titleLower === "tg cloud drive") {
+      if (titleLower === "bansify drive" || titleLower === "clash drive" || titleLower === "tg cloud drive") {
         score += 10000;
-      } else if (titleLower.includes("gothwad drive") || titleLower.includes("clash drive") || titleLower.includes("tg cloud drive")) {
+      } else if (titleLower.includes("bansify drive") || titleLower.includes("clash drive") || titleLower.includes("tg cloud drive")) {
         score += 6000;
-      } else if (titleLower.includes("tg cloud") || titleLower.includes("gothwaddrive") || titleLower.includes("clashdrive") || titleLower.includes("gothwad")) {
+      } else if (titleLower.includes("tg cloud") || titleLower.includes("bansifydrive") || titleLower.includes("clashdrive") || titleLower.includes("bansify")) {
         score += 3000;
       } else if (titleLower.includes("drive") || titleLower.includes("cloud") || titleLower.includes("vault")) {
         score += 500;

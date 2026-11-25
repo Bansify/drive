@@ -4,7 +4,7 @@ import { formatBytes } from "../../lib/manifest";
 import { Modal } from "../ui/Modal";
 import { Button } from "../ui/Button";
 import { BOT_USERNAME, DEFAULT_WORKER_URL } from "../../lib/bot";
-import { fetchShortShare, buildSsoSignInUrl } from "../../lib/gothwadSso";
+import { fetchShortShare, buildSsoSignInUrl } from "../../lib/bansifySso";
 
 interface ReceiveShareModalProps {
   initialHash?: string;

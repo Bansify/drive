@@ -7,8 +7,8 @@
 import type {
   Env,
   GothwadAccountSummary,
-  GothwadUser,
-  ResolvedGothwadSession,
+  BansifyUser,
+  ResolvedBansifySession,
 } from './types.ts';
 import {
   errorResponse,
@@ -20,7 +20,7 @@ import {
   verifyCsrfOrigin,
 } from './http.ts';
 
-function normalizeUserObject(raw: any, appDomain: string): GothwadUser | null {
+function normalizeUserObject(raw: any, appDomain: string): BansifyUser | null {
   if (!raw || typeof raw !== 'object') return null;
   const id = String(raw.id || raw.userId || '').trim();
   const rawEmail = String(raw.email || '').trim().toLowerCase();
@@ -95,11 +95,11 @@ export function extractAuthuserSelector(request: Request): string | null {
   return null;
 }
 
-export async function resolveGothwadSession(
+export async function resolveBansifySession(
   request: Request,
   env: Env,
   fetchImpl: typeof fetch = fetch,
-): Promise<ResolvedGothwadSession> {
+): Promise<ResolvedBansifySession> {
   const cookieHeader = request.headers.get('Cookie') || '';
   const authHeader = request.headers.get('Authorization') || '';
   const authuserSelector = extractAuthuserSelector(request);
@@ -292,7 +292,7 @@ export async function handleMeEndpoint(
   env: Env,
   fetchImpl: typeof fetch = fetch,
 ): Promise<Response> {
-  const session = await resolveGothwadSession(request, env, fetchImpl);
+  const session = await resolveBansifySession(request, env, fetchImpl);
   if (session.upstreamStatus === 429) {
     return errorResponse(
       request,
@@ -378,7 +378,7 @@ export async function proxyAccountsAuthMutation(
       'accounts_unavailable',
       503,
       [],
-      'Failed to reach Gothwad Accounts service.',
+      'Failed to reach Bansify Accounts service.',
     );
   }
 }

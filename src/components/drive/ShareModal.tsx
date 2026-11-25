@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { DriveFile, DriveConfig } from "../../types";
 import { formatBytes } from "../../lib/manifest";
 import { DEFAULT_WORKER_URL } from "../../lib/bot";
-import { createShortShare } from "../../lib/gothwadSso";
+import { createShortShare } from "../../lib/bansifySso";
 import { Modal } from "../ui/Modal";
 import { Button } from "../ui/Button";
 
