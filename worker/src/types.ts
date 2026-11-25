@@ -29,7 +29,7 @@ export interface Env {
   ALLOWED_ORIGINS?: string;
 }
 
-export interface GothwadUser {
+export interface BansifyUser {
   id: string;
   username: string;
   email: string;
@@ -61,11 +61,11 @@ export interface GothwadAccountSummary {
   lastUsedAt?: string;
 }
 
-export interface ResolvedGothwadSession {
+export interface ResolvedBansifySession {
   authenticated: boolean;
   activeId: string | null;
   authuser: number;
-  user: GothwadUser | null;
+  user: BansifyUser | null;
   accounts: GothwadAccountSummary[];
   setCookies: string[];
   upstreamStatus: number;

@@ -78,7 +78,7 @@ export interface SavedAccount {
   apiId: number;
   avatarUrl: string | null;
   phone?: string;
-  gothwadUserId?: string;
+  bansifyUserId?: string;
   updatedAt: number;
 }
 

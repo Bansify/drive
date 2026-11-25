@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Phone, Lock, Eye, EyeOff, ShieldCheck, ArrowRight, Shield, LogIn } from "lucide-react";
 import type { AuthState, GothwadSsoUser } from "../../types";
-import { buildSsoSignInUrl } from "../../lib/gothwadSso";
+import { buildSsoSignInUrl } from "../../lib/bansifySso";
 
 interface AuthWizardProps {
   state: AuthState;
@@ -285,16 +285,16 @@ export function AuthWizard({
             <span className="text-[10px] font-semibold text-gray-500 dark:text-gray-400/80 block leading-relaxed">
               <span className="font-bold text-[#0494f4]">Bansify Drive</span> is proudly developed and managed by{" "}
               <a
-                href="https://gothwadtech.com"
+                href="https://bansify.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-bold text-[#0494f4] hover:underline cursor-pointer decoration-[#0494f4] decoration-2"
               >
-                Gothwad Technologies
+                Bansify Technologies
               </a>{" "}
               for sovereign, self-reliant digital infrastructure. If you have any concerns, please{" "}
               <a
-                href="mailto:support@gothwadtech.com"
+                href="mailto:support@bansify.com"
                 className="font-bold text-[#0494f4] hover:underline cursor-pointer decoration-[#0494f4] decoration-2"
               >
                 contact us

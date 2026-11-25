@@ -6,7 +6,7 @@
  * =============================================================================
  */
 
-export const DEFAULT_APP_DOMAIN = "gothwadtech.com";
+export const DEFAULT_APP_DOMAIN = "bansify.com";
 
 function readViteEnv(key: string): string {
   try {
@@ -42,7 +42,7 @@ export const ACCOUNTS_API_ORIGIN = (
 
 export const ACCOUNT_WIDGET_URL = `${ACCOUNTS_WEB_ORIGIN}/widget/account-menu.js`;
 
-export function formatGothwadEmail(username: string, domain = APP_DOMAIN): string {
+export function formatBansifyEmail(username: string, domain = APP_DOMAIN): string {
   const clean = String(username || "").trim().toLowerCase();
   if (!clean) return "";
   return clean.includes("@") ? clean : `${clean}@${domain}`;

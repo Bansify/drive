@@ -118,9 +118,9 @@ describe("Gothwad Drive v4.0 Verification Suite", async () => {
     const db = createD1Mock(sqlite);
     const env = {
       DB: db,
-      APP_DOMAIN: "gothwadtech.com",
-      ACCOUNTS_API_URL: "https://api.gothwadtech.com",
-      ACCOUNTS_WEB_URL: "https://accounts.gothwadtech.com",
+      APP_DOMAIN: "bansify.com",
+      ACCOUNTS_API_URL: "https://api.bansify.com",
+      ACCOUNTS_WEB_URL: "https://accounts.bansify.com",
       DRIVE_ENCRYPTION_KEY: "test-master-secret-key-for-gothwad-drive-v4",
     };
 
@@ -171,9 +171,9 @@ describe("Gothwad Drive v4.0 Verification Suite", async () => {
     const sqlite = new DatabaseSync(":memory:");
     const env = {
       DB: createD1Mock(sqlite),
-      APP_DOMAIN: "gothwadtech.com",
-      ACCOUNTS_API_URL: "https://api.gothwadtech.com",
-      ACCOUNTS_WEB_URL: "https://accounts.gothwadtech.com",
+      APP_DOMAIN: "bansify.com",
+      ACCOUNTS_API_URL: "https://api.bansify.com",
+      ACCOUNTS_WEB_URL: "https://accounts.bansify.com",
     };
 
     const origFetch = globalThis.fetch;
@@ -191,13 +191,13 @@ describe("Gothwad Drive v4.0 Verification Suite", async () => {
             authenticated: true,
             user: {
               id: "usr_vault_01",
-              email: "alice@gothwadtech.com",
+              email: "alice@bansify.com",
               name: "Alice Gothwad",
             },
             accounts: [
               {
                 id: "usr_vault_01",
-                email: "alice@gothwadtech.com",
+                email: "alice@bansify.com",
                 name: "Alice Gothwad",
                 authuser: 0,
               },
@@ -213,7 +213,7 @@ describe("Gothwad Drive v4.0 Verification Suite", async () => {
 
       // Unauthenticated GET /api/drive/vault -> 401
       const unauthRes = await worker.fetch(
-        new Request("https://drive.gothwadtech.com/api/drive/vault"),
+        new Request("https://drive.bansify.com/api/drive/vault"),
         env
       );
       assert.equal(unauthRes.status, 401);
@@ -221,11 +221,11 @@ describe("Gothwad Drive v4.0 Verification Suite", async () => {
       // Authenticated PUT /api/drive/vault
       const authHeaders = {
         Cookie: "gothwad_sess_a=valid; gothwad_active=a",
-        Origin: "https://drive.gothwadtech.com",
+        Origin: "https://drive.bansify.com",
         "Content-Type": "application/json",
       };
       const putRes = await worker.fetch(
-        new Request("https://drive.gothwadtech.com/api/drive/vault", {
+        new Request("https://drive.bansify.com/api/drive/vault", {
           method: "PUT",
           headers: authHeaders,
           body: JSON.stringify({
@@ -262,7 +262,7 @@ describe("Gothwad Drive v4.0 Verification Suite", async () => {
 
       // Authenticated GET /api/drive/vault
       const getRes = await worker.fetch(
-        new Request("https://drive.gothwadtech.com/api/drive/vault", {
+        new Request("https://drive.bansify.com/api/drive/vault", {
           headers: { Cookie: "gothwad_sess_a=valid; gothwad_active=a" },
         }),
         env
@@ -277,7 +277,7 @@ describe("Gothwad Drive v4.0 Verification Suite", async () => {
 
       // Authenticated DELETE /api/drive/vault
       const delRes = await worker.fetch(
-        new Request("https://drive.gothwadtech.com/api/drive/vault", {
+        new Request("https://drive.bansify.com/api/drive/vault", {
           method: "DELETE",
           headers: authHeaders,
         }),
@@ -286,7 +286,7 @@ describe("Gothwad Drive v4.0 Verification Suite", async () => {
       assert.equal(delRes.status, 200);
 
       const getAfterDel = await worker.fetch(
-        new Request("https://drive.gothwadtech.com/api/drive/vault", {
+        new Request("https://drive.bansify.com/api/drive/vault", {
           headers: { Cookie: "gothwad_sess_a=valid; gothwad_active=a" },
         }),
         env
@@ -302,9 +302,9 @@ describe("Gothwad Drive v4.0 Verification Suite", async () => {
     const sqlite = new DatabaseSync(":memory:");
     const env = {
       DB: createD1Mock(sqlite),
-      APP_DOMAIN: "gothwadtech.com",
-      ACCOUNTS_API_URL: "https://api.gothwadtech.com",
-      ACCOUNTS_WEB_URL: "https://accounts.gothwadtech.com",
+      APP_DOMAIN: "bansify.com",
+      ACCOUNTS_API_URL: "https://api.bansify.com",
+      ACCOUNTS_WEB_URL: "https://accounts.bansify.com",
     };
 
     const origFetch = globalThis.fetch;
@@ -313,17 +313,17 @@ describe("Gothwad Drive v4.0 Verification Suite", async () => {
         new Response(
           JSON.stringify({
             authenticated: true,
-            user: { id: "usr_share_01", email: "bob@gothwadtech.com", name: "Bob" },
+            user: { id: "usr_share_01", email: "bob@bansify.com", name: "Bob" },
           }),
           { status: 200, headers: { "Content-Type": "application/json" } }
         );
 
       const createRes = await worker.fetch(
-        new Request("https://drive.gothwadtech.com/api/drive/shares", {
+        new Request("https://drive.bansify.com/api/drive/shares", {
           method: "POST",
           headers: {
             Cookie: "gothwad_sess_a=valid",
-            Origin: "https://drive.gothwadtech.com",
+            Origin: "https://drive.bansify.com",
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
@@ -350,7 +350,7 @@ describe("Gothwad Drive v4.0 Verification Suite", async () => {
 
       // Public GET /api/drive/shares/:id (signed-out user can resolve metadata)
       const get1 = await worker.fetch(
-        new Request(`https://drive.gothwadtech.com/api/drive/shares/${shareId}`),
+        new Request(`https://drive.bansify.com/api/drive/shares/${shareId}`),
         env
       );
       assert.equal(get1.status, 200);
@@ -360,7 +360,7 @@ describe("Gothwad Drive v4.0 Verification Suite", async () => {
       assert.equal(get1Json.share.downloads, 1);
 
       const get2 = await worker.fetch(
-        new Request(`https://drive.gothwadtech.com/api/drive/shares/${shareId}`),
+        new Request(`https://drive.bansify.com/api/drive/shares/${shareId}`),
         env
       );
       const get2Json = await get2.json();
@@ -374,22 +374,22 @@ describe("Gothwad Drive v4.0 Verification Suite", async () => {
     const sqlite = new DatabaseSync(":memory:");
     const env = {
       DB: createD1Mock(sqlite),
-      APP_DOMAIN: "gothwadtech.com",
-      ACCOUNTS_API_URL: "https://api.gothwadtech.com",
-      ACCOUNTS_WEB_URL: "https://accounts.gothwadtech.com",
+      APP_DOMAIN: "bansify.com",
+      ACCOUNTS_API_URL: "https://api.bansify.com",
+      ACCOUNTS_WEB_URL: "https://accounts.bansify.com",
     };
 
     const origFetch = globalThis.fetch;
     try {
       globalThis.fetch = async () => {
         const headers = new Headers({ "Content-Type": "application/json" });
-        headers.append("Set-Cookie", "gothwad_active=b; Domain=.gothwadtech.com; Path=/; Secure; HttpOnly");
-        headers.append("Set-Cookie", "gothwad_sess_b=rotated_tok; Domain=.gothwadtech.com; Path=/; Secure; HttpOnly");
+        headers.append("Set-Cookie", "gothwad_active=b; Domain=.bansify.com; Path=/; Secure; HttpOnly");
+        headers.append("Set-Cookie", "gothwad_sess_b=rotated_tok; Domain=.bansify.com; Path=/; Secure; HttpOnly");
         headers.append("Set-Cookie", "unrelated_cookie=ignore_me; Path=/");
         return new Response(
           JSON.stringify({
             authenticated: true,
-            user: { id: "usr_b", email: "b@gothwadtech.com" },
+            user: { id: "usr_b", email: "b@bansify.com" },
             activeId: "usr_b",
           }),
           { status: 200, headers }
@@ -397,7 +397,7 @@ describe("Gothwad Drive v4.0 Verification Suite", async () => {
       };
 
       const res = await worker.fetch(
-        new Request("https://drive.gothwadtech.com/api/me", {
+        new Request("https://drive.bansify.com/api/me", {
           headers: { Cookie: "gothwad_sess_b=old_tok" },
         }),
         env
@@ -416,13 +416,13 @@ describe("Gothwad Drive v4.0 Verification Suite", async () => {
     const sqlite = new DatabaseSync(":memory:");
     const env = {
       DB: createD1Mock(sqlite),
-      APP_DOMAIN: "gothwadtech.com",
-      ACCOUNTS_API_URL: "https://api.gothwadtech.com",
-      ACCOUNTS_WEB_URL: "https://accounts.gothwadtech.com",
+      APP_DOMAIN: "bansify.com",
+      ACCOUNTS_API_URL: "https://api.bansify.com",
+      ACCOUNTS_WEB_URL: "https://accounts.bansify.com",
     };
 
     const res = await worker.fetch(
-      new Request("https://drive.gothwadtech.com/api/drive/vault", {
+      new Request("https://drive.bansify.com/api/drive/vault", {
         method: "DELETE",
         headers: {
           Origin: "https://evil.example.com",

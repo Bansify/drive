@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { GothwadSsoUser, StartupState, VaultSyncState } from "../../types";
-import { buildSsoSignInUrl, slotUrl } from "../../lib/gothwadSso";
+import { buildSsoSignInUrl, slotUrl } from "../../lib/bansifySso";
 
 interface StartupStatusViewProps {
   startupState: StartupState;

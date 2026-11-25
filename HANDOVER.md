@@ -4,13 +4,13 @@
 
 | Resource | Value |
 | :--- | :--- |
-| **Frontend Origin** | `https://drive.gothwadtech.com` |
-| **Worker Route** | `drive.gothwadtech.com/api/*` (zone `gothwadtech.com`) |
+| **Frontend Origin** | `https://drive.bansify.com` |
+| **Worker Route** | `drive.bansify.com/api/*` (zone `bansify.com`) |
 | **Worker Name** | `drive` (`worker/wrangler.toml` & `wrangler.toml`) |
 | **D1 Database Name** | `drive` |
 | **D1 Database ID** | `dfefd813-244a-47f1-8f5a-8d5c15ba3162` |
-| **Upstream SSO API** | `https://api.gothwadtech.com` (`env.ACCOUNTS_API_URL`) |
-| **Account Switcher Widget** | `https://accounts.gothwadtech.com/widget/account-menu.js` |
+| **Upstream SSO API** | `https://api.bansify.com` (`env.ACCOUNTS_API_URL`) |
+| **Account Switcher Widget** | `https://accounts.bansify.com/widget/account-menu.js` |
 
 ---
 
@@ -38,8 +38,8 @@
    - Always configure `DRIVE_ENCRYPTION_KEY` in Cloudflare Worker secrets (`npx wrangler secret put DRIVE_ENCRYPTION_KEY -c worker/wrangler.toml`).
    - While `worker/src/crypto.ts` supports an automatic 256-bit fallback key in the D1 `system_keys` table for zero-configuration bootstrap, storing the fallback key in D1 does not protect against a full D1 database compromise unless `DRIVE_ENCRYPTION_KEY` is set in Worker secrets.
    - If `DRIVE_ENCRYPTION_KEY` is rotated or mismatched, existing rows return `vaultStatus: "corrupt"` and are locked against automatic overwrite (`409 vault_corrupt_locked`) so ciphertext in D1 is never silently lost.
-2. **Production Route Verification (`drive.gothwadtech.com/api/*`)**:
-   - Ensure the Cloudflare Worker route `drive.gothwadtech.com/api/*` is attached to the `drive` Worker in the Cloudflare dashboard. If the Worker route is detached, Cloudflare Pages `public/_redirects` (`/* /index.html 200`) will return `text/html` for `/api/*`, which the frontend explicitly diagnoses as `routing_html` rather than a false signed-out state.
+2. **Production Route Verification (`drive.bansify.com/api/*`)**:
+   - Ensure the Cloudflare Worker route `drive.bansify.com/api/*` is attached to the `drive` Worker in the Cloudflare dashboard. If the Worker route is detached, Cloudflare Pages `public/_redirects` (`/* /index.html 200`) will return `text/html` for `/api/*`, which the frontend explicitly diagnoses as `routing_html` rather than a false signed-out state.
    - Note: Live Cloudflare production route/secret state cannot be inspected from the local build sandbox without Cloudflare API credentials and must be verified in the Cloudflare dashboard or via `wrangler deploy`.
 
 ---

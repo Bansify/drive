@@ -5,7 +5,7 @@
  */
 
 import type { DriveShareRow, Env } from './types.ts';
-import { resolveGothwadSession } from './auth.ts';
+import { resolveBansifySession } from './auth.ts';
 import { generateShareId } from './crypto.ts';
 import {
   errorResponse,
@@ -24,7 +24,7 @@ export async function handleCreateShare(
     return errorResponse(request, env, 'csrf_rejected', 403, [], 'Cross-site request rejected');
   }
 
-  const session = await resolveGothwadSession(request, env, fetchImpl);
+  const session = await resolveBansifySession(request, env, fetchImpl);
   if (session.upstreamStatus === 503) {
     return errorResponse(request, env, 'accounts_unavailable', 503, session.setCookies);
   }

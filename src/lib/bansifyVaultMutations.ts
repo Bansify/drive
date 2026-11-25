@@ -16,13 +16,13 @@ import type {
 import {
   LS_SESSION_OWNER,
   type RequestOptions,
-} from "./gothwadSso";
+} from "./bansifySso";
 import {
   buildAuthHeaders,
   fetchBoundedApi,
   fetchDriveBootstrap,
   type BootstrapResponse,
-} from "./gothwadBootstrap";
+} from "./bansifyBootstrap";
 
 export { fetchDriveBootstrap, type BootstrapResponse };
 
@@ -213,7 +213,7 @@ export async function switchSsoAccount(target: {
   return switchGothwadAccountSlot(target.id, target.authuser ?? 0);
 }
 
-export async function signOutGothwadSlot(
+export async function signOutBansifySlot(
   slotId?: string,
   authuser = 0,
   options?: RequestOptions
@@ -254,11 +254,11 @@ export async function signOutSsoSlot(
   slotId: string,
   authuser = 0
 ): Promise<{ ok: boolean; error?: string }> {
-  return signOutGothwadSlot(slotId, authuser);
+  return signOutBansifySlot(slotId, authuser);
 }
 
 export async function signOutAllSso(authuser = 0): Promise<{ ok: boolean; error?: string }> {
-  return signOutGothwadSlot(undefined, authuser);
+  return signOutBansifySlot(undefined, authuser);
 }
 
 export async function createShortShare(
@@ -318,22 +318,22 @@ export async function fetchShortShare(shareId: string): Promise<{
 export interface LegacyLocalSessionInspection {
   session: string | null;
   tgUserId: string | null;
-  ownerGothwadUserId: string | null;
+  ownerBansifyUserId: string | null;
   ownedByCurrentUser: boolean;
   ownedByOtherUser: boolean;
 }
 
 export function inspectLegacyLocalSession(
-  currentGothwadUserId?: string | null
+  currentBansifyUserId?: string | null
 ): LegacyLocalSessionInspection {
   try {
-    let ownerGothwadUserId: string | null = null;
+    let ownerBansifyUserId: string | null = null;
     let ownerTgUserId: string | null = null;
     const rawOwner = localStorage.getItem(LS_SESSION_OWNER);
     if (rawOwner) {
       const parsedOwner = JSON.parse(rawOwner);
       if (parsedOwner && typeof parsedOwner === "object") {
-        ownerGothwadUserId = parsedOwner.gothwadUserId ? String(parsedOwner.gothwadUserId) : null;
+        ownerBansifyUserId = parsedOwner.bansifyUserId ? String(parsedOwner.bansifyUserId) : null;
         ownerTgUserId = parsedOwner.tgUserId ? String(parsedOwner.tgUserId) : null;
       }
     }
@@ -353,8 +353,8 @@ export function inspectLegacyLocalSession(
           if (withSession) {
             session = withSession.session.trim();
             if (!ownerTgUserId && withSession.userId) ownerTgUserId = String(withSession.userId);
-            if (!ownerGothwadUserId && withSession.gothwadUserId) {
-              ownerGothwadUserId = String(withSession.gothwadUserId);
+            if (!ownerBansifyUserId && withSession.bansifyUserId) {
+              ownerBansifyUserId = String(withSession.bansifyUserId);
             }
           }
         }
@@ -365,23 +365,23 @@ export function inspectLegacyLocalSession(
       return {
         session: null,
         tgUserId: null,
-        ownerGothwadUserId: null,
+        ownerBansifyUserId: null,
         ownedByCurrentUser: false,
         ownedByOtherUser: false,
       };
     }
 
     const ownedByCurrentUser = Boolean(
-      currentGothwadUserId && ownerGothwadUserId && ownerGothwadUserId === currentGothwadUserId
+      currentBansifyUserId && ownerBansifyUserId && ownerBansifyUserId === currentBansifyUserId
     );
     const ownedByOtherUser = Boolean(
-      currentGothwadUserId && ownerGothwadUserId && ownerGothwadUserId !== currentGothwadUserId
+      currentBansifyUserId && ownerBansifyUserId && ownerBansifyUserId !== currentBansifyUserId
     );
 
     return {
       session: ownedByOtherUser ? null : session,
       tgUserId: ownerTgUserId,
-      ownerGothwadUserId,
+      ownerBansifyUserId,
       ownedByCurrentUser,
       ownedByOtherUser,
     };
@@ -389,7 +389,7 @@ export function inspectLegacyLocalSession(
     return {
       session: null,
       tgUserId: null,
-      ownerGothwadUserId: null,
+      ownerBansifyUserId: null,
       ownedByCurrentUser: false,
       ownedByOtherUser: false,
     };
@@ -397,22 +397,22 @@ export function inspectLegacyLocalSession(
 }
 
 export function tagPendingLegacySessionOwner(
-  gothwadUserId: string,
+  bansifyUserId: string,
   tgUserId?: string | null
 ): void {
-  if (!gothwadUserId) return;
+  if (!bansifyUserId) return;
   try {
     localStorage.setItem(
       LS_SESSION_OWNER,
-      JSON.stringify({ gothwadUserId, tgUserId: tgUserId || null, updatedAt: Date.now() })
+      JSON.stringify({ bansifyUserId, tgUserId: tgUserId || null, updatedAt: Date.now() })
     );
   } catch {
     // ignore storage errors
   }
 }
 
-export function readLegacyLocalSession(currentGothwadUserId?: string | null): string | null {
-  return inspectLegacyLocalSession(currentGothwadUserId).session;
+export function readLegacyLocalSession(currentBansifyUserId?: string | null): string | null {
+  return inspectLegacyLocalSession(currentBansifyUserId).session;
 }
 
 export const readLegacyLocalStorageSession = readLegacyLocalSession;

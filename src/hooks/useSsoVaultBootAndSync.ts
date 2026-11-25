@@ -14,7 +14,7 @@ import {
   inspectLegacyLocalSession,
   scrubRawSessionFromLocalStorage,
   tagPendingLegacySessionOwner,
-} from "../lib/gothwadSso";
+} from "../lib/bansifySso";
 import { setActiveStorageScope } from "../lib/db";
 import { ensureStreamWorkerReady } from "../lib/previewSetup";
 import type { ConnectOptions } from "./useAuth";
@@ -74,7 +74,7 @@ export function useSsoVaultBootAndSync(params: {
 
   useEffect(() => {
     setActiveStorageScope({
-      gothwadUserId: ssoUser?.id || null,
+      bansifyUserId: ssoUser?.id || null,
       tgUserId: userProfile?.id || null,
       chatId: driveConfig?.chatId || null,
     });
@@ -119,7 +119,7 @@ export function useSsoVaultBootAndSync(params: {
           errorKind: bootRes.errorKind,
           errorMessage:
             bootRes.errorMessage ||
-            "Could not verify Gothwad Technologies identity. Your cloud vault has not been modified.",
+            "Could not verify Bansify Technologies identity. Your cloud vault has not been modified.",
           vaultStatus: "unknown",
           vaultCorrupt: false,
           canRetry: true,
@@ -136,7 +136,7 @@ export function useSsoVaultBootAndSync(params: {
         setAuthuser(bootRes.authuser);
       }
       setActiveStorageScope({
-        gothwadUserId: verifiedUser.id,
+        bansifyUserId: verifiedUser.id,
         tgUserId: bootRes.vault?.userId || null,
         chatId: bootRes.vault?.driveConfig?.chatId || null,
       });

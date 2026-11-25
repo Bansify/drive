@@ -15,9 +15,9 @@ This document defines the mandatory architectural, security, and code-quality st
 3. **Remote-Safe Cloudflare D1 SQL (Zero `PRAGMA`)**:
    - Never include `PRAGMA` statements (`PRAGMA foreign_keys`, `PRAGMA journal_mode`, etc.) in `sql/*.sql` or `worker/src/schema.ts`. Remote Cloudflare D1 rejects raw `PRAGMA` execution with `SQLITE_AUTH`.
 4. **Never Call Same-Zone `accounts.<domain>/api/*` From a Worker**:
-   - Cloudflare Workers subrequests to another Worker route on the same zone can fail or loop. Always call `env.ACCOUNTS_API_URL` (`https://api.gothwadtech.com`) from Worker code.
+   - Cloudflare Workers subrequests to another Worker route on the same zone can fail or loop. Always call `env.ACCOUNTS_API_URL` (`https://api.bansify.com`) from Worker code.
 5. **Centralized Domain Branding (`src/config/brand.ts`)**:
-   - `APP_DOMAIN = "gothwadtech.com"` in `src/config/brand.ts` is the single source of truth for frontend URLs (`ACCOUNTS_ORIGIN`, `ACCOUNTS_API_ORIGIN`, `DRIVE_ORIGIN`, `ACCOUNT_MENU_SCRIPT_URL`).
+   - `APP_DOMAIN = "bansify.com"` in `src/config/brand.ts` is the single source of truth for frontend URLs (`ACCOUNTS_ORIGIN`, `ACCOUNTS_API_ORIGIN`, `DRIVE_ORIGIN`, `ACCOUNT_MENU_SCRIPT_URL`).
 6. **Backward-Compatible Telegram Supergroup Signatures**:
    - `src/config/telegram.ts` (`hasDriveSignature`) and `src/lib/radar.ts` must always recognize both `#GothwadDrive_v1` and `#TgCloudDrive_v1`.
 

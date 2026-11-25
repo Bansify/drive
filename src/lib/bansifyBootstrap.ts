@@ -1,6 +1,6 @@
 import {
   ACCOUNTS_WEB_ORIGIN,
-  formatGothwadEmail,
+  formatBansifyEmail,
 } from "../config/brand";
 import { setRuntimeTelegramApiCredentials } from "../config/telegram";
 import type {
@@ -13,9 +13,9 @@ import type {
 import {
   DEFAULT_API_TIMEOUT_MS,
   fetchDriveVault,
-  fetchGothwadSession,
+  fetchBansifySession,
   type RequestOptions,
-} from "./gothwadSso";
+} from "./bansifySso";
 
 export function buildAuthHeaders(authuser?: number, expectedUserId?: string | null): Record<string, string> {
   const headers: Record<string, string> = { Accept: "application/json" };
@@ -23,7 +23,7 @@ export function buildAuthHeaders(authuser?: number, expectedUserId?: string | nu
     headers["X-Gothwad-Authuser"] = String(authuser);
   }
   if (expectedUserId && expectedUserId.trim()) {
-    headers["X-Gothwad-Expect-User"] = expectedUserId.trim();
+    headers["X-Bansify-Expect-User"] = expectedUserId.trim();
   }
   return headers;
 }
@@ -113,7 +113,7 @@ export async function fetchDriveBootstrap(
       return makeIdentityError(
         authuser,
         "routing_html",
-        "API route /api/drive/bootstrap returned HTML instead of JSON. Ensure the Cloudflare Worker route drive.gothwadtech.com/api/* is attached."
+        "API route /api/drive/bootstrap returned HTML instead of JSON. Ensure the Cloudflare Worker route drive.bansify.com/api/* is attached."
       );
     }
     if (!ct.includes("application/json")) {
@@ -126,7 +126,7 @@ export async function fetchDriveBootstrap(
     }
 
     if (res.status === 404 && data.error === "not_found") {
-      const meRes = await fetchGothwadSession(authuser, options);
+      const meRes = await fetchBansifySession(authuser, options);
       if (meRes.status === "error") {
         return makeIdentityError(authuser, meRes.errorKind, meRes.errorMessage || "Identity check failed.");
       }
@@ -229,7 +229,7 @@ export async function fetchDriveBootstrap(
     const user: GothwadSsoUser = {
       id,
       username,
-      email: formatGothwadEmail(rawUser.email || username),
+      email: formatBansifyEmail(rawUser.email || username),
       firstName,
       lastName,
       name,
@@ -246,7 +246,7 @@ export async function fetchDriveBootstrap(
             name: String(a?.name || a?.username || "Account"),
             firstName: String(a?.firstName ?? a?.first_name ?? ""),
             lastName: String(a?.lastName ?? a?.last_name ?? ""),
-            email: formatGothwadEmail(a?.email || a?.username || ""),
+            email: formatBansifyEmail(a?.email || a?.username || ""),
             avatarUrl: a?.avatarUrl ?? a?.avatar_url ?? null,
             avatar_url: a?.avatarUrl ?? a?.avatar_url ?? null,
             accountUrl: a?.accountUrl || `${ACCOUNTS_WEB_ORIGIN}/u/${a?.authuser ?? idx}/me`,

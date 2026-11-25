@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * GOTHWAD DRIVE CLOUDFLARE WORKER — ENTRY POINT (`drive.gothwadtech.com/api/*`)
+ * GOTHWAD DRIVE CLOUDFLARE WORKER — ENTRY POINT (`drive.bansify.com/api/*`)
  * =============================================================================
  */
 

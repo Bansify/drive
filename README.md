@@ -1,8 +1,8 @@
 # Gothwad Drive (v4.0)
 
-**Unlimited Zero-Cost Cloud Storage for the Gothwad Technologies Ecosystem** (`drive.gothwadtech.com`).
+**Unlimited Zero-Cost Cloud Storage for the Gothwad Technologies Ecosystem** (`drive.bansify.com`).
 
-Gothwad Drive v4.0 combines a direct browser-to-Telegram MTProto storage engine (`@mtcute/web`) with a Cloudflare Worker + D1 edge layer for silent `.gothwadtech.com` Single Sign-On (SSO), AES-256-GCM encrypted MTProto session vaults, cached folder tree hydration, and short public share links (`/s/:shareId`).
+Gothwad Drive v4.0 combines a direct browser-to-Telegram MTProto storage engine (`@mtcute/web`) with a Cloudflare Worker + D1 edge layer for silent `.bansify.com` Single Sign-On (SSO), AES-256-GCM encrypted MTProto session vaults, cached folder tree hydration, and short public share links (`/s/:shareId`).
 
 ---
 
@@ -10,9 +10,9 @@ Gothwad Drive v4.0 combines a direct browser-to-Telegram MTProto storage engine 
 
 1. **Zero-Cost Hybrid Storage Model**:
    - **File Bytes**: Stream directly between the user's browser and Telegram Datacenters over WebSocket MTProto (`@mtcute/web`) with 20 MB chunk manifests and a Service Worker (`public/stream-sw.js`) supporting `206 Partial Content` byte-range streaming.
-   - **Identity, Encrypted Session Vault & Share Metadata**: Stored in Cloudflare D1 (`drive`, database ID `dfefd813-244a-47f1-8f5a-8d5c15ba3162`) behind the `drive` Cloudflare Worker (`drive.gothwadtech.com/api/*`).
+   - **Identity, Encrypted Session Vault & Share Metadata**: Stored in Cloudflare D1 (`drive`, database ID `dfefd813-244a-47f1-8f5a-8d5c15ba3162`) behind the `drive` Cloudflare Worker (`drive.bansify.com/api/*`).
 2. **Single-Identity-Verification Bootstrap (`GET /api/drive/bootstrap`) & Truthful Error Classification**:
-   - Verifies `.gothwadtech.com` SSO identity once against `https://api.gothwadtech.com/api/auth/me` and returns both the verified identity and the selected user's cloud vault state in a single round-trip while forwarding all rotated `Set-Cookie` headers individually.
+   - Verifies `.bansify.com` SSO identity once against `https://api.bansify.com/api/auth/me` and returns both the verified identity and the selected user's cloud vault state in a single round-trip while forwarding all rotated `Set-Cookie` headers individually.
    - Strictly separates confirmed anonymous responses (`401` or `200 { authenticated: false }`) from service and routing errors (`5xx`, `429`, network failures, timeouts, redirects, malformed JSON, or HTML responses when `/api/*` is caught by the SPA catch-all).
    - Renders the verified account shell (`Header`, account switcher, and cached folders) immediately after identity verification without blocking behind optional avatar downloads or background MTProto indexing.
 3. **Versioned AES-256-GCM Encrypted Cloud Session Vault & Ciphertext Protection**:
@@ -36,7 +36,7 @@ Gothwad Drive v4.0 combines a direct browser-to-Telegram MTProto storage engine 
 │   ├── 00_d1_console_bootstrap.sql # Remote-safe D1 bootstrap SQL (zero PRAGMA)
 │   └── 01_drive_schema.sql         # Canonical D1 schema (system_keys, drive_vaults, drive_shares)
 ├── worker/
-│   ├── wrangler.toml               # Worker config (name = "drive", route drive.gothwadtech.com/api/*)
+│   ├── wrangler.toml               # Worker config (name = "drive", route drive.bansify.com/api/*)
 │   └── src/
 │       ├── index.ts                # Worker router (/api/health, /api/me, /api/drive/bootstrap, /api/drive/*)
 │       ├── auth.ts                 # Upstream SSO verification & Set-Cookie multi-header forwarding
@@ -85,7 +85,7 @@ npx wrangler deploy --dry-run -c worker/wrangler.toml
 2. **Configure Worker Secret & Deploy (`worker/wrangler.toml`)**:
    - Set the encryption secret in Worker secrets so the master key is stored outside D1:
      `npx wrangler secret put DRIVE_ENCRYPTION_KEY -c worker/wrangler.toml`
-   - Deploy the Worker and ensure route `drive.gothwadtech.com/api/*` is attached in the `gothwadtech.com` zone:
+   - Deploy the Worker and ensure route `drive.bansify.com/api/*` is attached in the `bansify.com` zone:
      `npx wrangler deploy -c worker/wrangler.toml`
 3. **Deploy Frontend (Cloudflare Pages)**:
-   - Build command: `npm run build`, Output directory: `dist`, Custom domain: `drive.gothwadtech.com`.
+   - Build command: `npm run build`, Output directory: `dist`, Custom domain: `drive.bansify.com`.

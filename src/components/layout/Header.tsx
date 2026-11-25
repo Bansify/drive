@@ -11,7 +11,7 @@ import {
   initialsFrom,
 } from "../../lib/accountMenuWidget";
 import { APP_DOMAIN, ACCOUNTS_WEB_ORIGIN, ACCOUNTS_API_ORIGIN, ECOSYSTEM_NAME } from "../../config/brand";
-import { slotUrl } from "../../lib/gothwadSso";
+import { slotUrl } from "../../lib/bansifySso";
 
 interface HeaderProps {
   driveTitle: string;
@@ -329,7 +329,7 @@ export function Header({
                   >
                     <span>{joiningChannel ? "Joining..." : "Join Updates"}</span>
                     <span className="text-[9.5px] font-mono text-md-primary bg-md-primary-container px-1.5 py-0.5 rounded-md">
-                      @gothwadtech
+                      @bansifytech
                     </span>
                   </button>
                 )}

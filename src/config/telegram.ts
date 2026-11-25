@@ -125,7 +125,7 @@ export function hasExplicitApiCredentials(): boolean {
 /**
  * Client Identification for Telegram Active Sessions screen
  */
-export const DEVICE_MODEL = "GothwadDrive";
+export const DEVICE_MODEL = "BansifyDrive";
 export const APP_VERSION = "4.0";
 export const SYSTEM_VERSION =
   typeof navigator !== "undefined" && navigator.userAgent
@@ -140,10 +140,10 @@ export const SYSTEM_VERSION =
 
 /**
  * Primary signature embedded in the group description so the radar can
- * discover the drive across devices. Recognizes both `#GothwadDrive_v1`
+ * discover the drive across devices. Recognizes both `#BansifyDrive_v1`
  * and legacy `#TgCloudDrive_v1` for 100% backward compatibility.
  */
-export const DRIVE_SIGNATURE = "#GothwadDrive_v1";
+export const DRIVE_SIGNATURE = "#BansifyDrive_v1";
 export const LEGACY_DRIVE_SIGNATURE = "#TgCloudDrive_v1";
 export const ALL_DRIVE_SIGNATURES = [DRIVE_SIGNATURE, LEGACY_DRIVE_SIGNATURE] as const;
 

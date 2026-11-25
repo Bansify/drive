@@ -12,7 +12,7 @@ import {
   setMemorySession,
   startConnectionMonitor,
 } from "../lib/client";
-import { tagPendingLegacySessionOwner } from "../lib/gothwadVaultMutations";
+import { tagPendingLegacySessionOwner } from "../lib/bansifyVaultMutations";
 import {
   AVATAR_TIMEOUT_MS,
   CONNECT_ATTEMPT_TIMEOUT_MS,

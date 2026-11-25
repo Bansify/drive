@@ -12,7 +12,7 @@ import {
   ACCOUNTS_WEB_ORIGIN,
   buildAccountSlotPath,
   buildSignInUrl,
-  formatGothwadEmail,
+  formatBansifyEmail,
   parseAuthuserFromUrl,
   parseShareRouteFromUrl,
 } from "../config/brand";
@@ -57,7 +57,7 @@ function normalizeClientUser(raw: any): GothwadSsoUser | null {
   return {
     id,
     username,
-    email: formatGothwadEmail(raw.email || username),
+    email: formatBansifyEmail(raw.email || username),
     firstName,
     lastName,
     name,
@@ -86,7 +86,7 @@ function normalizeClientAccount(raw: any, idx: number): GothwadAccountItem {
     name,
     firstName,
     lastName,
-    email: formatGothwadEmail(raw?.email || username),
+    email: formatBansifyEmail(raw?.email || username),
     avatarUrl: normalizedAvatar,
     avatar_url: normalizedAvatar,
     accountUrl: raw?.accountUrl || `${ACCOUNTS_WEB_ORIGIN}/u/${authuser}/me`,
@@ -100,7 +100,7 @@ function buildAuthuserHeaders(authuser?: number, expectedUserId?: string | null)
     headers["X-Gothwad-Authuser"] = String(authuser);
   }
   if (expectedUserId && expectedUserId.trim()) {
-    headers["X-Gothwad-Expect-User"] = expectedUserId.trim();
+    headers["X-Bansify-Expect-User"] = expectedUserId.trim();
   }
   return headers;
 }
@@ -213,7 +213,7 @@ function makeMeError(
   };
 }
 
-export async function fetchGothwadSession(
+export async function fetchBansifySession(
   authuser = 0,
   options?: RequestOptions
 ): Promise<FetchMeResult> {
@@ -231,7 +231,7 @@ export async function fetchGothwadSession(
       return makeMeError(
         authuser,
         "routing_html",
-        "API route /api/me returned HTML instead of JSON. Ensure the Cloudflare Worker route drive.gothwadtech.com/api/* is active."
+        "API route /api/me returned HTML instead of JSON. Ensure the Cloudflare Worker route drive.bansify.com/api/* is active."
       );
     }
     if (!ct.includes("application/json")) {
@@ -286,7 +286,7 @@ export async function fetchGothwadSession(
   }
 }
 
-export const fetchSsoMe = fetchGothwadSession;
+export const fetchSsoMe = fetchBansifySession;
 
 export interface FetchVaultResult {
   status: VaultStatusKind;
@@ -333,7 +333,7 @@ export async function fetchDriveVault(
     if (ct.includes("text/html")) {
       return makeVaultError(
         "routing_html",
-        "Vault endpoint /api/drive/vault returned HTML instead of JSON. Verify the Cloudflare Worker route drive.gothwadtech.com/api/*."
+        "Vault endpoint /api/drive/vault returned HTML instead of JSON. Verify the Cloudflare Worker route drive.bansify.com/api/*."
       );
     }
     if (!ct.includes("application/json")) {
@@ -397,7 +397,7 @@ export {
   deleteDriveVault,
   switchGothwadAccountSlot,
   switchSsoAccount,
-  signOutGothwadSlot,
+  signOutBansifySlot,
   signOutSsoSlot,
   signOutAllSso,
   createShortShare,
@@ -413,4 +413,4 @@ export {
   type SaveVaultPayload,
   type SaveVaultResult,
   type LegacyLocalSessionInspection,
-} from "./gothwadVaultMutations";
+} from "./bansifyVaultMutations";
