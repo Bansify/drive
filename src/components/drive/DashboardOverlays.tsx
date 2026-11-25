@@ -16,6 +16,10 @@ import { Sidebar } from "./Sidebar";
 import { FileIcon } from "./FileIcon";
 
 export interface DashboardProps {
+  /** Rendered inside the Bansify shell: hide the app's own header and sidebar. */
+  embedded?: boolean;
+  /** Bumped by the shell when its Settings row is chosen. */
+  settingsSignal?: number;
   client?: TelegramClient | null;
   driveConfig: DriveConfig;
   topics: TopicFolder[];
